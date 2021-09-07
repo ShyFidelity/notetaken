@@ -1,4 +1,3 @@
-
 const app = require('express').Router();
 const path = require('path');
 const dataBase = require('../db/db.json');

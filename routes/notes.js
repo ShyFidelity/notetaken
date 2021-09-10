@@ -1,14 +1,18 @@
 const notes = require('express').Router();
-const { readFromFile, readAndAppend } = require('../helpers/fsUtils');
+const { readAndAppend } = require('../helpers/fsUtils');
 const uuid = require('../helpers/uuid');
+const notesData = require('../db/db.json');
+const fs = require('fs');
 
 // GET Route for retrieving all the notes
-notes.get('/', (req, res) => {
-  readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
+notes.get('/api/notes', (req, res) => {
+  const dataBase = fs.readFileSync('./db/db.json');
+  const parsedData = JSON.parse(dataBase);
+  res.json(parsedData);
 });
 
 // POST Route for a new note
-notes.post('/', (req, res) => {
+notes.post('/api/notes', (req, res) => {
   console.log(req.body);
 
   const { title, text } = req.body;
@@ -17,7 +21,7 @@ notes.post('/', (req, res) => {
     const newNote = {
       title,
       text,
-      note_id: uuid(),
+      id: uuid(),
     };
 
 
@@ -32,10 +36,20 @@ notes.post('/', (req, res) => {
 //     };
 
     readAndAppend(newNote, './db/db.json');
-    res.json(`Note added you organized person`);
+    res.json(`Note added! You organized person!`);
   } else {
     res.error('Error in adding note');
   }
 });
+
+
+notes.delete('/api/notes/:id',(req, res)  => {
+  const dataBase = fs.readFileSync('./db/db.json');
+  const parsedData = JSON.parse(dataBase);
+  const filteredData = parsedData.filter((note) => note.id !== req.params.id)
+  fs.writeFileSync('db/db.json', JSON.stringify(filteredData));
+  res.json(filteredData)
+
+})
 
 module.exports = notes;

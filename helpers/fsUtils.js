@@ -1,3 +1,5 @@
+
+//helper functions for making data a string or objects 
 const fs = require('fs');
 
 const readAndAppend = (content, file) => {

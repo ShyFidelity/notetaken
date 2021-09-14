@@ -1,3 +1,5 @@
+
+//dependencies 
 const notes = require('express').Router();
 const { readAndAppend } = require('../helpers/fsUtils');
 const uuid = require('../helpers/uuid');
@@ -24,16 +26,7 @@ notes.post('/api/notes', (req, res) => {
       id: uuid(),
     };
 
-
-//   const { username, topic, tip } = req.body;
-
-//   if (req.body) {
-//     const newTip = {
-//       username,
-//       tip,
-//       topic,
-//       tip_id: uuid(),
-//     };
+    //adding a new note to the json object in the database
 
     readAndAppend(newNote, './db/db.json');
     res.json(`Note added! You organized person!`);
@@ -42,7 +35,7 @@ notes.post('/api/notes', (req, res) => {
   }
 });
 
-
+//created bonus function to delete a note 
 notes.delete('/api/notes/:id',(req, res)  => {
   const dataBase = fs.readFileSync('./db/db.json');
   const parsedData = JSON.parse(dataBase);

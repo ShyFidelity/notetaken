@@ -4,8 +4,8 @@
   ![](https://img.shields.io/badge/license-ApacheLicense2.0-blue.svg)
 
 
-## preview of the app 
-
+## Preview of the app 
+[live link](https://mighty-cliffs-78253.herokuapp.com/)
 ![](public/assets/screenshot.png)
 ## Table of Contents
 * [Description](#Description) 
@@ -32,7 +32,7 @@ We used express routing technologies to create this app. It's deployed via Herok
 Jillian FitzMaurice 
   
 ## [Tech Used](#Tech)🎯
-npm, node, express, 
+javascript, HTML5, node, express, heroku 
   
 ## [Dependencies](#dependencies)
   npm i, 
